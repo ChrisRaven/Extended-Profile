@@ -1,0 +1,161 @@
+// This is not a true JSON file, just a file containing a variable containg a JSON object to inject it via <script> tags
+let flags =
+[
+  {
+    "text": "<i>none</i>",
+    "imageSrc": "0.png",
+    "value": 0
+  },
+  {
+    "text": "ASEAN",
+    "description": "Association of South-East Asian Nations",
+    "imageSrc": "ASEAN.png",
+    "value": 3
+  },
+  {
+    "text": "Aboriginal People",
+    "imageSrc": "Aboriginal_People.png",
+    "value": 22
+  },
+  {
+    "text": "African Union",
+    "imageSrc": "African_Union.png",
+    "value": 1
+  },
+  {
+    "text": "Arab League",
+    "imageSrc": "Arab_League.png",
+    "value": 2
+  },
+  {
+    "text": "CARICOM",
+    "description": "The Caribbean Community and Common Market",
+    "imageSrc": "CARICOM.png",
+    "value": 4
+  },
+  {
+    "text": "CIS",
+    "description": "The Commonwealth of Independent States",
+    "imageSrc": "CIS.png",
+    "value": 5
+  },
+  {
+    "text": "Catalonia",
+    "imageSrc": "Catalonia.png",
+    "value": 23
+  },
+  {
+    "text": "Commonwealth",
+    "description": "The Commonwealth of Nations",
+    "imageSrc": "Commonwealth.png",
+    "value": 6
+  },
+  {
+    "text": "Danube Commission",
+    "imageSrc": "Danube_Commission.png",
+    "value": 7
+  },
+  {
+    "text": "Esperanto",
+    "imageSrc": "Esperanto.png",
+    "value": 27
+  },
+  {
+    "text": "Fire Department",
+    "imageSrc": "Fire_Department.png",
+    "value": 25
+  },
+  {
+    "text": "ICA",
+    "description": "International Co-operative Alliance",
+    "imageSrc": "ICA.png",
+    "value": 9
+  },
+  {
+    "text": "Medical Services",
+    "imageSrc": "Medical_Services.png",
+    "value": 26
+  },
+  {
+    "text": "NATO",
+    "description": "North Atlantic Treaty Organization",
+    "imageSrc": "NATO.png",
+    "value": 10
+  },
+  {
+    "text": "Nordic Council",
+    "imageSrc": "Nordic_Council.png",
+    "value": 11
+  },
+  {
+    "text": "OAS",
+    "description": "Organization of American States",
+    "imageSrc": "OAS.png",
+    "value": 14
+  },
+  {
+    "text": "OPEC",
+    "description": "Organization of the Petroleum Exporting Countries",
+    "imageSrc": "OPEC.png",
+    "value": 13
+  },
+  {
+    "text": "Olympics",
+    "imageSrc": "Olympics.png",
+    "value": 12
+  },
+  {
+    "text": "Pirates",
+    "imageSrc": "Pirates.png",
+    "value": 28
+  },
+  {
+    "text": "Red Crescent",
+    "description": "International Red Cross and Red Crescent Movement",
+    "imageSrc": "Red_Crescent.png",
+    "value": 16
+  },
+  {
+    "text": "Red Cross",
+    "description": "International Committee of the Red Cross",
+    "imageSrc": "Red_Cross.png",
+    "value": 15
+  },
+  {
+    "text": "Romani",
+    "imageSrc": "Romani.png",
+    "value": 8
+  },
+  {
+    "text": "SPC",
+    "description": "Pacific Community",
+    "imageSrc": "SPC.png",
+    "value": 18
+  },
+  {
+    "text": "Sámi",
+    "description": "Sami people",
+    "imageSrc": "Sami.png",
+    "value": 17
+  },
+  {
+    "text": "UN",
+    "description": "United Nations",
+    "imageSrc": "UN.png",
+    "value": 19
+  },
+  {
+    "text": "WAGGGS",
+    "description": "World Association of Girl Guides and Girl Scouts",
+    "imageSrc": "WAGGGS.png",
+    "value": 21
+  },
+  {
+    "text": "WOSM",
+    "description": "World Organization of the Scout Movement",
+    "imageSrc": "WOSM.png",
+    "value": 24
+  }
+]
+
+;

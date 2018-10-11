@@ -1,0 +1,290 @@
+#profilePicture {
+  padding: 15px 0 0 5px;
+}
+
+#ews-ep-contact-email-input,
+#ews-ep-notes-input,
+#ews-ep-contact-email-div,
+#ews-ep-notes-div {
+  color: #e4e1e1;
+  background: none;
+  border: 1px solid rgba(60,60,60,.83);
+  outline: none;
+  font-size: 13px;
+  display: none;
+}
+
+#ews-ep-contact-email-input,
+#ews-ep-contact-email-div {
+  width: 304px;
+  margin-bottom: 5px;
+}
+
+#ews-ep-contact-email-div {
+  height: 15px;
+}
+
+#ews-ep-notes-input,
+#ews-ep-notes-div {
+  height: 90px;
+  width: 300px;
+}
+
+#ews-ep-notes-div {
+  width: 304px;
+}
+
+#ews-ep-delete-avatar {
+  display: none;
+  position: absolute;
+  top: 110px;
+  left: 80px;
+  color: red;
+  font-size: 20px;
+}
+
+#ews-ep-save {
+  position: relative;
+  top: -6px;
+  left: 154px;
+  background-color: rgba(54,121,165,.8);
+  color: #e4e1e1;
+  border-radius: 2px;
+  outline: none;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border: 1px solid rgba(60,60,60,.83);
+  padding: 7px;
+  display: none;
+}
+
+.clickable-element {
+  cursor: pointer;
+}
+
+#ews-ep-flag1,
+#ews-ep-flag2,
+#ews-ep-flag3 {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+#ews-ep-flag1 img,
+#ews-ep-flag2 img,
+#ews-ep-flag3 img {
+  border: 1px solid rgba(60,60,60,.83);
+  padding: 0px;
+}
+
+.dd-container,
+.dd-select {
+  width: 39px !important;
+}
+
+.dd-select {
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+.dd-selected {
+  padding: 0px !important;
+}
+
+.dd-selected-text,
+.dd-pointer {
+  display: none !important;
+}
+
+.dd-options {
+  background-color: rgba(29,29,32) !important;
+  border: 1px solid rgba(60,60,60) !important;
+  box-shadow: none !important;
+}
+
+.dd-option {
+  padding: 2px !important;
+  border-bottom: 1px solid rgba(60,60,60) !important;
+  color: #bfbfbf !important;
+}
+
+.dd-option:hover {
+  background-color: hsla(0,0%,100%,.11) !important;
+}
+
+.dd-option-selected {
+  background-color: rgba(115,124,140,.28) !important;
+}
+
+#ews-ep-save.disabled-save-button,
+#save-colors-button.disabled-save-button {
+  cursor: default;
+  background-color: rgba(54,54,54,.97);
+}
+
+#flags-container {
+  position: absolute;
+  left: 110px;
+  top: 107px;
+}
+
+#ews-ep-edit-username {
+  display: none;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+#profUsername {
+  display: inline-block;
+}
+
+#username-color-background {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 20000;
+}
+
+#username-color-select {
+  position: absolute;
+  width: 425px;
+  height: 350px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  background-color: rgba(29,29,32);
+  z-index: 20001;
+  border: 1px solid rgba(60,60,60);
+  border-radius: 5px;
+}
+
+#username-color-select-close {
+  background-image: url(https://eyewire.org/static/images/ui/Close.svg);
+  width: 20px;
+  height: 20px;
+  right: 10px;
+  top: 10px;
+  position: absolute;
+  cursor: pointer;
+}
+
+#test-chat {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(60,60,60);
+  width: 220px;
+}
+
+#test-chat .chatMsg {
+  font-size: 13px;
+}
+
+#username-spreaded {
+  border-collapse: collapse;
+  position: absolute;
+  left: 10px;
+  top: 110px;
+}
+
+#username-spreaded td {
+  color: white;
+  padding: 0;
+  text-align: center;
+  max-width: 16px;
+}
+
+#username-color-select .text-color-selector {
+  position: absolute;
+  top: 175px;
+  left: 10px;
+}
+
+#username-color-select .glow-color-selector {
+  position: absolute;
+  top: 175px;
+  left: 220px;
+}
+
+#checkbox-container {
+  position: absolute;
+  left: 260px;
+  top: 5px;
+  width: 120px;
+  color: #ccc;
+  font-size: 13px;
+}
+
+#checkbox-container label {
+  display: block;
+}
+
+#ews-ep-select-all-wrapper {
+    min-width: 70px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+#ews-ep-select-all {
+  vertical-align: top;
+}
+
+#text-selection-label,
+#glow-selection-label {
+  position: absolute;
+  color: #ccc;
+  top: 155px;
+  font-size: 12px;
+}
+
+#text-selection-label {
+  left: 15px;
+}
+
+#glow-selection-label {
+  left: 225px;
+}
+
+#forbidden-color-label {
+  position: absolute;
+  display: none;
+  color: red;
+  top: 325px;
+  left: 20px;
+  z-index: 10000000;
+  font-size: 12px;
+}
+
+#checkbox-glow-label {
+  text-shadow: #ccc 0px 0px 7px;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+
+#save-colors-button {
+  position: absolute;
+  top: 130px;
+  right: 10px;
+  background-color: rgba(54,121,165,.8);
+  color: #e4e1e1;
+  border-radius: 2px;
+  outline: none;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border: 1px solid rgba(60,60,60,.83);
+  padding: 7px;
+  font-size: 13px;
+}
+
+.dd-selected-image {
+  background-color: rgba(30,30,30,.95);
+}
+
+.dd-option-description {
+  color: #777 !important;
+}

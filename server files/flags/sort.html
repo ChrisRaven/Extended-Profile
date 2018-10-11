@@ -1,0 +1,33 @@
+<head>
+  <style>
+    textarea {
+      width: 400px;
+      height: 700px;
+    }
+  </style>
+</head>
+<body>
+<textarea id="source"></textarea>
+<textarea id="dest"></textarea>
+<button id="sort">sort</button>
+
+<script type="text/javascript">
+  function compare(a,b) {
+    if (a.text < b.text)
+      return -1;
+    if (a.text > b.text)
+      return 1;
+    return 0;
+  }
+  
+  document.getElementById('sort').addEventListener('click', function () {
+    let src = JSON.parse(document.getElementById('source').value);
+    let dst = document.getElementById('dest');
+  
+    src.sort(compare);
+  console.log(src)
+    dst.value = JSON.stringify(src, null, 2);
+  });
+  </script>
+  
+</body>
