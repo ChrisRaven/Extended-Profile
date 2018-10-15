@@ -191,7 +191,7 @@ function deltaE(labA, labB){
     K.gid('profileBadges').remove();
 
     K.gid('profilePicture').innerHTML = `
-      <img id="profile-picture-img" width=96 height=96 src="` + serverPath + `avatars/0.png">
+      <img id="profile-picture-img" width=100 height=100 src="` + serverPath + `avatars/0.png">
       <div id="ews-ep-delete-avatar">❌</div>
       <input type="button" id="ews-ep-save" class="disabled-save-button" value="Save" disabled>`;
     K.gid('profileBiographicData').innerHTML = `
