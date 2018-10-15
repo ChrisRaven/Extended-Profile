@@ -242,6 +242,7 @@ function deltaE(labA, labB){
     K.gid('ews-ep-save').addEventListener('click', function () {
       let data = new FormData();
 
+      data.append('uid', account.account.uid);
       data.append('uname', K.gid('profUsername').innerHTML);
 
       data.append('email', K.gid('ews-ep-contact-email-input').value);
@@ -271,6 +272,9 @@ function deltaE(labA, labB){
         contentType: false,
         processData: false,
         url: serverPath + 'ep_save_user_settings.php',
+        xhrFields: { // source: https://stackoverflow.com/a/47993517
+          withCredentials: true
+        }
       }).done(function (data) {
         disableSaveButton();
       });
@@ -305,48 +309,46 @@ function deltaE(labA, labB){
   }
 
   function addFlag(id, data, container) {
-    if (data['flag' + id]) {
-      let flag = document.createElement('div');
-      flag.id = 'ews-ep-flag' + id;
-      let elem = data['flag' + id];
+    let flag = document.createElement('div');
+    flag.id = 'ews-ep-flag' + id;
+    let elem = data['flag' + id] || 0;
 
-      container.appendChild(flag);
+    container.appendChild(flag);
 
-      if (ownProfile) {
-        flags.forEach(function (el) {
-          el.selected = el.value == elem;
-        });
+    if (ownProfile) {
+      flags.forEach(function (el) {
+        el.selected = el.value == elem;
+      });
 
-        $(flag).ddslick({
-          data: flags,
-          height: 300,
-          width: 300,
-          onSelected: function () {
-            enableSaveButton();
-          }
-        });
-        // the defaultSelectedIndex option triggers onSelected() method, so we have to disable the Save button again
-        disableSaveButton();
+      $(flag).ddslick({
+        data: flags,
+        height: 300,
+        width: 300,
+        onSelected: function () {
+          enableSaveButton();
+        }
+      });
+      // the defaultSelectedIndex option triggers onSelected() method, so we have to disable the Save button again
+      disableSaveButton();
+    }
+    else {
+      let sel;
+
+      for (let el of flags) {
+        if (el.value == elem) {
+          sel = el;
+          break;
+        }
+      }
+
+      if (sel.value !== '0') {
+        flag.innerHTML = `
+          <img src="` + sel.imageSrc + `"
+            alt = "` + sel.text + `"
+            title = "` + sel.text + `">`;
       }
       else {
-        let sel;
-
-        for (let el of flags) {
-          if (el.value == elem) {
-            sel = el;
-            break;
-          }
-        }
-
-        if (sel.value !== '0') {
-          flag.innerHTML = `
-            <img src="` + sel.imageSrc + `"
-              alt = "` + sel.text + `"
-              title = "` + sel.text + `">`;
-        }
-        else {
-          flag.innerHTML = '';
-        }
+        flag.innerHTML = '';
       }
     }
   }
@@ -366,11 +368,11 @@ function deltaE(labA, labB){
     if (+data.has_avatar) { // to int
       K.gid('profile-picture-img').src = serverPath + 'avatars/' + uname + '.png';
       avatarExists = true;
+      return;
     }
-    else {
-      K.gid('profile-picture-img').src = serverPath + 'avatars/0.png';
-      avatarExists = false;
-    }
+    // serves both no avatar and a new profile
+    K.gid('profile-picture-img').src = serverPath + 'avatars/0.png';
+    avatarExists = false;
   }
 
   function enableSaveButton() {
@@ -548,6 +550,7 @@ function deltaE(labA, labB){
     });
 
     let data = new FormData();
+    data.append('uid', account.account.uid);
     data.append('uname', uname);
     data.append('settings', copy.innerHTML);
 
@@ -557,6 +560,9 @@ function deltaE(labA, labB){
       contentType: false,
       processData: false,
       url: serverPath + 'ep_save_user_color_settings.php',
+      xhrFields: { // source: https://stackoverflow.com/a/47993517
+        withCredentials: true
+      }
     }).done(function (data) {
       K.gid('save-colors-button').classList.add('disabled-save-button');
       K.gid('save-colors-button').disabled = true;
@@ -763,11 +769,11 @@ function deltaE(labA, labB){
 
     $.ajax({
       data: { uname: uname },
-      url: serverPath + 'ep_get_user_settings.php',
+      url: serverPath + 'ep_get_user_settings.php'
     }).done(function (data) {
       data = JSON.parse(data);
-      K.gid('ews-ep-contact-email-input').value = decodeHtml(data.contact);
-      K.gid('ews-ep-notes-input').value = decodeHtml(data.notes);
+      K.gid('ews-ep-contact-email-input').value = data.uname ? decodeHtml(data.contact) : '';
+      K.gid('ews-ep-notes-input').value = data.uname ? decodeHtml(data.notes) : '';
 
       manageAvatar(data, uname);
       addFlags(data);
@@ -814,21 +820,28 @@ function deltaE(labA, labB){
   }
 
     
-  function main() {console.log('ther')
-    if (LOCAL) {console.log('here')
+  function main() {
+    if (LOCAL) {
       K.addCSSFile('http://127.0.0.1:8887/styles.css');
       K.addCSSFile('http://127.0.0.1:8887/spectrum.css');
-      K.injectJS('http://localhost/ep/spectrum.js');
+      K.injectJS(null, 'http://localhost/ep/spectrum.js');
     }
     else {
       K.addCSSFile('https://chrisraven.github.io/EyeWire-Extended-Profile/styles.css?v=1');
       K.addCSSFile('https://chrisraven.github.io/EyeWire-Extended-Profile/spectrum.css');
-      K.addCSSFile('https://chrisraven.github.io/EyeWire-Extended-Profile/spectrum.js');
+      K.injectJS(null, 'https://chrisraven.github.io/EyeWire-Extended-Profile/spectrum.js');
     }
+    
 
     $.ajax({
+      data: {
+        uid: account.account.uid
+      },
       method: 'get',
-      url: serverPath + 'ep_get_other_users_color_settings.php'
+      url: serverPath + 'ep_get_other_users_color_settings.php',
+      xhrFields: { // source: https://stackoverflow.com/a/47993517
+        withCredentials: true
+      }
     }).done(function (data) {
       customUserColors = JSON.parse(data);
       $(".chatMsgContainer").on("DOMNodeInserted", ".chatMsg", function() {
