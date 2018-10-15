@@ -12,7 +12,14 @@ if (!in_array($domain, ['https://eyewire.org', 'https://beta.eyewire.org', 'http
   exit('incorrect domain');
 }
 
+session_start();
+
 header('Access-Control-Allow-Origin: ' . $domain);
+header('Access-Control-Allow-Credentials: true'); // source: https://stackoverflow.com/a/47993517
+
+$uid = filter_input(INPUT_GET, 'uid', FILTER_VALIDATE_INT);
+$_SESSION['uid'] = $uid;
+$_SESSION['uip'] = $_SERVER['REMOTE_ADDR'];
 
 $result = $pdo->query("SELECT uname, settings FROM extended_profile");
 

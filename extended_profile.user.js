@@ -195,9 +195,7 @@ function deltaE(labA, labB){
       <div id="ews-ep-delete-avatar">❌</div>
       <input type="button" id="ews-ep-save" class="disabled-save-button" value="Save" disabled>`;
     K.gid('profileBiographicData').innerHTML = `
-      <input id="ews-ep-contact-email-input" placeholder="contact e-mail">
       <textarea id="ews-ep-notes-input" placeholder="notes"></textarea>
-      <div id="ews-ep-contact-email-div" placeholder="contact e-mail"></div>
       <div id="ews-ep-notes-div" placeholder="notes"></div>`;
 
     let pu = K.gid('profUsername');
@@ -236,7 +234,6 @@ function deltaE(labA, labB){
       }
     });
 
-    K.gid('ews-ep-contact-email-input').addEventListener('input', enableSaveButton);
     K.gid('ews-ep-notes-input').addEventListener('input', enableSaveButton);
 
     K.gid('ews-ep-save').addEventListener('click', function () {
@@ -245,7 +242,6 @@ function deltaE(labA, labB){
       data.append('uid', account.account.uid);
       data.append('uname', K.gid('profUsername').innerHTML);
 
-      data.append('email', K.gid('ews-ep-contact-email-input').value);
       data.append('notes', K.gid('ews-ep-notes-input').value);
 
       data.append('flag1', K.qS('#ews-ep-flag1 .dd-selected-value').value);
@@ -282,14 +278,8 @@ function deltaE(labA, labB){
   }
 
   function prepareProfile() {
-    if (K.gid('ews-ep-contact-email-input')) {
-      K.gid('ews-ep-contact-email-input').value = '';
-    }
     if (K.gid('ews-ep-notes-input')) {
       K.gid('ews-ep-notes-input').value = '';
-    }
-    if (K.gid('ews-ep-contact-email-div')) {
-      K.gid('ews-ep-contact-email-div').innerHTML = '';
     }
     if (K.gid('ews-ep-notes-div')) {
       K.gid('ews-ep-notes-div').innerHTML = '';
@@ -731,9 +721,7 @@ function deltaE(labA, labB){
   function extendOwnProfile() {
     let uname = K.gid('profUsername').innerHTML;
 
-    K.gid('ews-ep-contact-email-input').style.display = 'block';
     K.gid('ews-ep-notes-input').style.display = 'block';
-    K.gid('ews-ep-contact-email-div').style.display = 'none';
     K.gid('ews-ep-notes-div').style.display = 'none';
     K.gid('ews-ep-save').style.display = 'inline-block';
     K.gid('ews-ep-edit-username').style.display = 'inline-block';
@@ -772,7 +760,6 @@ function deltaE(labA, labB){
       url: serverPath + 'ep_get_user_settings.php'
     }).done(function (data) {
       data = JSON.parse(data);
-      K.gid('ews-ep-contact-email-input').value = data.uname ? decodeHtml(data.contact) : '';
       K.gid('ews-ep-notes-input').value = data.uname ? decodeHtml(data.notes) : '';
 
       manageAvatar(data, uname);
@@ -787,9 +774,7 @@ function deltaE(labA, labB){
     let
       uname = K.gid('profUsername').innerHTML;
 
-    K.gid('ews-ep-contact-email-input').style.display = 'none';
     K.gid('ews-ep-notes-input').style.display = 'none';
-    K.gid('ews-ep-contact-email-div').style.display = 'block';
     K.gid('ews-ep-notes-div').style.display = 'block';
     K.gid('ews-ep-save').style.display = 'none';
     K.gid('ews-ep-edit-username').style.display = 'none';
@@ -806,12 +791,10 @@ function deltaE(labA, labB){
     }).done(function (data) {
       data = JSON.parse(data);
       if (!data.uname) {
-        K.gid('ews-ep-contact-email-div').innerHTML = '';
         K.gid('ews-ep-notes-div').innerHTML = "<i>This user doesn't use the Extended Profile script</i>";
         return;
       }
 
-      K.gid('ews-ep-contact-email-div').innerHTML = data.contact;
       K.gid('ews-ep-notes-div').innerHTML = data.notes;
 
       manageAvatar(data, uname);
