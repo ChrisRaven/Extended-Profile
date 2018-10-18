@@ -17,20 +17,12 @@ session_start();
 header('Access-Control-Allow-Origin: ' . $domain);
 header('Access-Control-Allow-Credentials: true'); // source: https://stackoverflow.com/a/47993517
 
-$uid = filter_input(INPUT_GET, 'uid', FILTER_VALIDATE_INT);
+$uname = $_POST['uname'];
+$uname = str_replace(array('"', "'"), '', $uname);
+
+$uid = filter_input(INPUT_POST, 'uid', FILTER_VALIDATE_INT);
 $_SESSION['uid'] = $uid;
 $_SESSION['uip'] = $_SERVER['REMOTE_ADDR'];
+$_SESSION['uname'] = $uname;
 
-$result = $pdo->query("SELECT uname, settings FROM extended_profile");
-
-$finalResult = [];
-if ($result->rowCount()) {
-  $rows = $result->fetchAll();
-  for ($i = 0; $i < count($rows); $i++) {
-    $finalResult[$rows[$i]['uname']] = htmlspecialchars_decode($rows[$i]['settings']);
-  }
-  echo json_encode($finalResult);
-}
-else {
-  echo '{"settings": null}';
-}
+echo 'done';

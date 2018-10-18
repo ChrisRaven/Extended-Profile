@@ -31,43 +31,49 @@ $uname = $_POST['uname'];
 $uname = str_replace(array('"', "'"), '', $uname);
 
 $uid = filter_input(INPUT_POST, 'uid', FILTER_VALIDATE_INT);
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $flag1 = filter_input(INPUT_POST, 'flag1', FILTER_VALIDATE_INT);
 $flag2 = filter_input(INPUT_POST, 'flag2', FILTER_VALIDATE_INT);
 $flag3 = filter_input(INPUT_POST, 'flag3', FILTER_VALIDATE_INT);
-$deleteAvatar = filter_input(INPUT_POST, 'delete_avatar', FILTER_VALIDATE_BOOLEAN);
+$avatarType = filter_input(INPUT_POST, 'avatarType', FILTER_VALIDATE_INT);
+$avatarName = filter_input(INPUT_POST, 'avatarName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$avatarName = str_replace(array('/', '\\'), '', $avatarName);
 
-if ($uid !== $_SESSION['uid']) {
+if ($uid !== $_SESSION['uid'] || $uname !== $_SESSION['uname']) {
   exit();
 }
 
-$path = 'avatars/' . $uname . '.png';
-
-$avatarExists = false;
-if (isset($_FILES['avatar'])) {
-  $avatar = $_FILES['avatar'];
-  $avatarExists = true;
+$customAvatarExists = false;
+if ($avatarType === 2 && isset($_FILES['avatar'])) {
+  $avatarFile = $_FILES['avatar'];
+  $customAvatarExists = true;
 }
 
-$hasAvatar = (int)!$deleteAvatar;
+if (is_null($avatarType)) {
+  $avatarType = 0;
+}
 
-$sql = "INSERT INTO extended_profile (uname, notes, flag1, flag2, flag3, has_avatar)
-  VALUES ('{$uname}', '{$notes}', {$flag1}, {$flag2}, {$flag3}, {$hasAvatar})
+$sql = "INSERT INTO extended_profile (uname, contact, notes, flag1, flag2, flag3, avatarType, avatarName)
+  VALUES ('{$uname}', '{$email}', '{$notes}', {$flag1}, {$flag2}, {$flag3}, {$avatarType}, '{$avatarName}')
   ON DUPLICATE KEY UPDATE
-  notes='{$notes}', flag1={$flag1}, flag2={$flag2}, flag3={$flag3}, has_avatar={$hasAvatar}";
+  contact='{$email}', notes='{$notes}', flag1={$flag1}, flag2={$flag2}, flag3={$flag3}, avatarType={$avatarType}, avatarName='{$avatarName}'";
 
 $result = $pdo->query($sql);
 
 
-if ($deleteAvatar) {
-  if (file_exists($path)) {
-    unlink($path);
+$customPath = 'avatars/' . $uname . '.png';
+
+if ($avatarType === 0 || $avatarType === 1) {
+  if (file_exists($customPath)) {
+    unlink($customPath);
   }
 }
 
-if ($avatarExists) {
-  $img = imagecreatefromstring(file_get_contents($avatar['tmp_name']));
+if ($customAvatarExists) {
+  $img = imagecreatefromstring(file_get_contents($avatarFile['tmp_name']));
   $img = imagescale($img, 100, 100, IMG_BICUBIC);
-  imagepng($img, $path);
+  imagepng($img, $customPath);
 }
+
 echo 'done';
