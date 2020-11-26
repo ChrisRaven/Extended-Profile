@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Extended Profile
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      2.0.0.0
 // @description  Extened User Profile in EyeWire
 // @author       Krzysztof Kruk
 // @match        https://*.eyewire.org/*
@@ -20,7 +20,7 @@ if (LOCAL) {
   serverPath = 'http://localhost/ep/';
 }
 else {
-  serverPath = 'https://ewstats.feedia.co/';
+  serverPath = 'https://ewstats.heliohost.us/';
 }
 
 // source: http://designwithpc.com/Plugins/ddSlick

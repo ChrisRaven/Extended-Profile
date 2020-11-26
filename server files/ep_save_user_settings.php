@@ -3,7 +3,7 @@ require '../credentials/pass.php';
 
 $domain = $_SERVER['HTTP_ORIGIN'];
 
-if (!in_array($domain, ['https://eyewire.org', 'https://beta.eyewire.org', 'https://chris.eyewire.org'])) {
+if (!in_array($domain, ['https://eyewire.org', 'https://beta.eyewire.org', 'https://chris.eyewire.org', 'https://dev1.eyewire.org'])) {
   exit('incorrect domain');
 }
 
