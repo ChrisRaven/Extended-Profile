@@ -7,7 +7,6 @@
 // @match        https://*.eyewire.org/*
 // @exclude      https://*.eyewire.org/1.0/*
 // @downloadURL  https://raw.githubusercontent.com/ChrisRaven/EyeWire-Extended-Profile/master/extended_profile.user.js
-
 // ==/UserScript==
 
 /*jshint esversion: 6 */
